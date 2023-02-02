@@ -1,0 +1,10 @@
+asgiref==3.6.0
+attrs==22.2.0
+Django==4.1.6
+iniconfig==2.0.0
+packaging==23.0
+pluggy==1.0.0
+pytest==7.2.1
+pytest-django==4.5.2
+pytest-testdox==3.0.1
+sqlparse==0.4.3
