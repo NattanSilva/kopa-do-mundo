@@ -1,3 +1,24 @@
+class NegativeTitlesError(Exception):
+    default_message = "titles cannot be negative"
+
+    def __init__(self, message=None):
+        self.message = message or self.default_message
+
+
+class InvalidYearCupError(Exception):
+    default_message = "there was no world cup this year"
+
+    def __init__(self, message=None):
+        self.message = message or self.default_message
+
+
+class ImpossibleTitlesError(Exception):
+    default_message = "impossible to have more titles than disputed cups"
+
+    def __init__(self, message=None):
+        self.message = message or self.default_message
+
+
 def includes(lista: list, valor_buscado: int) -> bool:
     for value in lista:
         if value == valor_buscado:
@@ -31,19 +52,13 @@ def data_processing(dict_selection):
     ]
 
     if dict_selection["titles"] < 0:
-        return (True, {"error": "titles cannot be negative"})
+        raise NegativeTitlesError()
 
     if not includes(cup_years, first_cup_year):
-        return (True, {"error": "there was no world cup this year"})
+        raise InvalidYearCupError()
 
     if int(dict_selection["titles"]) > get_year_interval(first_cup_year, 2022):
-        return (
-            True,
-            {"error": "impossible to have more titles than disputed cups"}
-        )
-
-    return (False, {"message": "Correct data"})
-
+        raise ImpossibleTitlesError()
 
 # data = {
 #     "name": "França",
